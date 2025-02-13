@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon</title>
+  <!-- Google Font for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind configuration with dark mode and custom colors
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            primary: '#8A2BE2',    // Blue Violet
+            secondary: '#4B0082',  // Indigo
+          },
+          animation: {
+            'spin-slow': 'spin 20s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* -------------------------------
+       Custom Animations & Styles
+    ------------------------------- */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fadeInDown {
+      animation: fadeInDown 1.5s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fadeInUp {
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+      100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+    }
+    .pulseGlow {
+      animation: pulseGlow 2s infinite;
+    }
+    /* Rotating Geometric Shape in the Background */
+    .rotating-shape {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(45deg, rgba(138,43,226,0.1), rgba(75,0,130,0.1));
+      clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin-slow;
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* Ensure the canvas covers the entire background */
+    #stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+    /* Social Icon Hover */
+    .social-icon:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen overflow-hidden bg-black">
+  <!-- Canvas Starfield Background -->
+  <canvas id="stars" class="w-full h-full"></canvas>
+  
+  <!-- Rotating Geometric Shape -->
+  <div class="rotating-shape"></div>
+  
+  <!-- Main Content -->
+  <div class="z-10 relative flex flex-col items-center justify-center min-h-screen px-4 text-center">
+    <!-- Headline -->
+    <h1 class="text-5xl md:text-7xl font-bold text-white fadeInDown">
+      We're Launching Soon
+    </h1>
+    <p class="mt-4 text-lg md:text-2xl text-gray-300 fadeInUp">
+      Something extraordinary is on the horizon. Stay tuned!
+    </p>
+
+    <!-- Countdown Timer -->
+    <div id="countdown" class="flex justify-center space-x-6 mt-10 fadeInUp">
+      <div class="flex flex-col items-center">
+        <span id="days" class="text-4xl md:text-6xl font-bold text-white pulseGlow">00</span>
+        <span class="text-sm uppercase text-gray-400">Days</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span id="hours" class="text-4xl md:text-6xl font-bold text-white pulseGlow">00</span>
+        <span class="text-sm uppercase text-gray-400">Hours</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span id="minutes" class="text-4xl md:text-6xl font-bold text-white pulseGlow">00</span>
+        <span class="text-sm uppercase text-gray-400">Minutes</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <span id="seconds" class="text-4xl md:text-6xl font-bold text-white pulseGlow">00</span>
+        <span class="text-sm uppercase text-gray-400">Seconds</span>
+      </div>
+    </div>
+
+    <!-- Subscription Form -->
+    <div class="mt-10 fadeInUp">
+      <form class="flex flex-col sm:flex-row items-center gap-4">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          required
+          class="w-full max-w-md px-6 py-3 rounded-md bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-primary focus:outline-none"
+        />
+        <button type="submit" class="px-8 py-3 bg-primary hover:bg-secondary transition duration-300 rounded-md text-white font-semibold">
+          Notify Me
+        </button>
+      </form>
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="mt-10 fadeInUp">
+      <p class="text-gray-400 mb-4">Follow us</p>
+      <div class="flex justify-center space-x-6">
+        <!-- Twitter -->
+        <a href="#" class="text-gray-300 hover:text-white social-icon">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.59 8.59 0 01-2.73 1.04 4.28 4.28 0 00-7.3 3.9A12.14 12.14 0 013 4.87a4.28 4.28 0 001.32 5.71 4.24 4.24 0 01-1.94-.54v.06a4.28 4.28 0 003.43 4.2 4.3 4.3 0 01-1.93.07 4.28 4.28 0 004 2.97 8.59 8.59 0 01-5.3 1.83A8.75 8.75 0 012 19.54a12.12 12.12 0 006.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19-.01-.38-.02-.57A8.66 8.66 0 0024 4.56a8.4 8.4 0 01-2.54.7z"></path>
+          </svg>
+        </a>
+        <!-- Facebook -->
+        <a href="#" class="text-gray-300 hover:text-white social-icon">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M22.675 0h-21.35C.6 0 0 .6 0 1.337v21.326C0 23.4.6 24 1.325 24H12.82V14.708h-3.355v-3.622h3.355V8.413c0-3.32 2.027-5.134 4.993-5.134 1.42 0 2.642.105 2.995.152v3.478l-2.058.001c-1.614 0-1.926.767-1.926 1.892v2.478h3.853l-.502 3.622h-3.351V24h6.573c.725 0 1.325-.6 1.325-1.337V1.337C24 .6 23.4 0 22.675 0z"/>
+          </svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="text-gray-300 hover:text-white social-icon">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.75a1 1 0 110 2 1 1 0 010-2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------------------
+       JavaScript: Countdown Timer & Starfield
+  ---------------------------- -->
+  <script>
+    /* Countdown Timer */
+    const targetDate = new Date("2025-03-01T00:00:00").getTime();
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+      if (timeLeft < 0) {
+        document.getElementById("countdown").innerHTML =
+          "<span class='text-4xl text-white'>Launched!</span>";
+        clearInterval(timer);
+        return;
+      }
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      daysEl.textContent = String(days).padStart(2, "0");
+      hoursEl.textContent = String(hours).padStart(2, "0");
+      minutesEl.textContent = String(minutes).padStart(2, "0");
+      secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+
+    /* Starfield Animation using Canvas */
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    const STAR_COUNT = 300;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function createStars() {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random(),
+          flicker: Math.random() * 0.02 + 0.005,
+        });
+      }
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        star.x += star.vx;
+        star.y += star.vy;
+        // Update opacity to create a subtle twinkling effect
+        star.opacity += star.flicker;
+        if (star.opacity >= 1 || star.opacity <= 0.2) star.flicker = -star.flicker;
+        // Wrap stars around screen edges
+        if (star.x < 0) star.x = canvas.width;
+        if (star.x > canvas.width) star.x = 0;
+        if (star.y < 0) star.y = canvas.height;
+        if (star.y > canvas.height) star.y = 0;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(animateStars);
+    }
+
+    createStars();
+    animateStars();
+  </script>
+</body>
+</html>
